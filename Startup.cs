@@ -16,6 +16,10 @@ namespace WebpackSPASample
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,14 +30,23 @@ namespace WebpackSPASample
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.UseSpa(spa =>
             {
-                endpoints.MapGet("/", async context =>
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
                 {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8082");
+                }
             });
         }
     }
