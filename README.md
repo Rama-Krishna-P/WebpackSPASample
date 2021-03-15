@@ -3,20 +3,20 @@
 This project outlines how to host a web pack SPA on .NET Core application along side apis.
 
 ## Project Creation
----
+
 Create an ASP.NET core application project using empty template.
 
 ## Add SPA app
----
+
 1) Create a folder "ClientApp" in the root directory of the project.
 2) Create the web pack SPA client application in this "ClientApp" folder.
 
 ## Add the necessary NuGet package
----
+
 Add the "Microsoft.AspNetCore.SpaServices.Extensions" package compatible with the target framework of the project.
 
 ## Add spa support in the startup class
----
+
 In the startup make the below changes to support SPA<br/>
 
 1) Add SPA in the ConfigureServices method
@@ -56,7 +56,7 @@ app.UseSpa(spa =>
 Make sure to change the SPA development server address accordingly.
 
 ## Modify cs project file to publish client app artifacts
----
+
 Open the cs project file and make the below changes
 ```
 ...
